@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue video game</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        img{
+            height: 200px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+ 
+
+<div id="app">
+
+    {{ message }}
+    <p v-if="totalCart > 0">Total Items in Cart: {{totalCart}}</p>
+    <div v-for="book in books">
+        <h1>{{ book.title }}</h1>
+        <img v-bind:src="book.imgSrc">
+        <p v-if="book.reservedCount > 0">Reserved Count: {{ book.reservedCount}}</p>
+        <button v-on:click="reserveBook(book)" >Reserve {{book.title}}</button>
+    </div>
+
+</div>
+
+<script>
+
+  const app = Vue.createApp({
+    data() {
+      return {
+        message: 'Shopping Cart',
+
+        books:
+        [
+            {title: "Harry Potter and the philosopher's stone", reservedCount: 0, imgSrc: "philosphersstone.jpg"},
+            {title: "Harry Potter and the Goblet of Fire", reservedCount: 0, imgSrc: "gobletoffire.jpg"},
+        ],
+        totalCart: 0
+      }
+    },
+
+    methods: {
+        reserveBook(objItem) {
+            console.log(objItem);
+            objItem.reservedCount++;
+            this.totalCart++;
+        }
+    }
+
+  }).mount('#app')
+
+</script>
+    
+</body>
+</html>
